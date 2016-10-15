@@ -1,0 +1,14 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @players.each do |p| %>
+      <tr>
+        <td><%= p.name %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
