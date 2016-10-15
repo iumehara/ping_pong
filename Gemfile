@@ -13,6 +13,7 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 
 group :development do
+  gem 'rubocop', '~> 0.43', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
