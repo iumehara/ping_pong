@@ -1,11 +1,9 @@
 class PlayersController < ApplicationController
-  before_action :set_player, only: [:show, :edit, :update, :destroy]
+  before_action :set_player, only: [:edit, :update, :destroy]
+  before_action :set_tournament
 
   def index
     @players = Player.all
-  end
-
-  def show
   end
 
   def new
@@ -18,8 +16,12 @@ class PlayersController < ApplicationController
   def create
     @player = Player.new(player_params)
 
+    @player.tournament_id = @tournament.id
     if @player.save
-      redirect_to @player, notice: 'Player was successfully created.'
+      redirect_to(
+        tournament_players_path(@tournament.id),
+        notice: 'Player was successfully created.'
+      )
     else
       render :new
     end
@@ -27,7 +29,10 @@ class PlayersController < ApplicationController
 
   def update
     if @player.update(player_params)
-      redirect_to @player, notice: 'Player was successfully updated.'
+      redirect_to(
+        tournament_players_path(@tournament.id),
+        notice: 'Player was successfully updated.'
+      )
     else
       render :edit
     end
@@ -35,13 +40,20 @@ class PlayersController < ApplicationController
 
   def destroy
     @player.destroy
-    redirect_to players_url, notice: 'Player was successfully destroyed.'
+    redirect_to(
+      tournament_players_path(@tournament.id),
+      notice: 'Player was successfully destroyed.'
+    )
   end
 
   private
 
   def set_player
     @player = Player.find(params[:id])
+  end
+
+  def set_tournament
+    @tournament = Tournament.find(params[:tournament_id])
   end
 
   def player_params

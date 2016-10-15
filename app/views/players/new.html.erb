@@ -1,5 +1,6 @@
-<h1>New Player</h1>
+<h1><%= @tournament.name %></h1>
+<h2>New Player</h2>
 
-<%= render 'form', player: @player %>
+<%= render 'form', player: @player, url: tournament_players_path(@tournament.id) %>
 
-<%= link_to 'Back', players_path %>
+<%= link_to 'Back', tournament_players_path(@tournament.id) %>
