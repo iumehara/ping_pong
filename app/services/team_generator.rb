@@ -1,5 +1,7 @@
 class TeamGenerator
   def self.make_pairs(tournament)
+    return unless valid_conditions_for_running(tournament)
+
     players = tournament.players.to_a
 
     while players.count >= 2
@@ -19,5 +21,9 @@ class TeamGenerator
     random_element = array.sample
     array.delete(random_element)
     random_element
+  end
+
+  def self.valid_conditions_for_running(tournament)
+    tournament.teams.count.zero?
   end
 end
