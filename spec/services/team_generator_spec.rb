@@ -14,6 +14,8 @@ RSpec.describe TeamGenerator do
       TeamGenerator.make_pairs(tournament)
 
       expect(tournament.teams.count).to eq(3)
+      reloaded_tournament = Tournament.find(tournament.id)
+      expect(reloaded_tournament.status).to eq('teams_created')
     end
 
     it 'does not create teams if tournament already has at least one team' do

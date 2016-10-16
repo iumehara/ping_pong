@@ -8,13 +8,14 @@ class TeamGenerator
       player_one = sample_and_delete(players)
       player_two = sample_and_delete(players)
 
-      Team.create(
+      tournament.teams.create(
         name: "#{player_one.name} and #{player_two.name}",
-        tournament_id: tournament.id,
         player_one_id: player_one.id,
         player_two_id: player_two.id
       )
     end
+
+    tournament.teams_created!
   end
 
   def self.sample_and_delete(array)
@@ -24,6 +25,6 @@ class TeamGenerator
   end
 
   def self.valid_conditions_for_running(tournament)
-    tournament.teams.count.zero?
+    tournament.teams.count.zero? && tournament.signup?
   end
 end
