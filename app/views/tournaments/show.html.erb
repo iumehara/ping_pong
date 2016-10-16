@@ -4,9 +4,17 @@
   <%= @tournament.name %>
 </h1>
 
-<h2>
-  Players
-  <%= render 'players/index' %>  
-</h2>
+<% if @tournament.signup? %>
 
-<%= button_to "Create Teams", tournament_generate_teams_path(@tournament.id) %>
+  <h2>
+    Players
+    <%= render 'players/index' %>
+  </h2>
+
+  <%= link_to "Sign Up", new_tournament_player_path(@tournament.id) %>
+
+<% elsif @tournament.teams_created? %>
+
+  <h2>Teams</h2>
+  <%= render 'teams/index' %>
+<% end %>

@@ -19,7 +19,7 @@ class PlayersController < ApplicationController
     @player.tournament_id = @tournament.id
     if @player.save
       redirect_to(
-        tournament_players_path(@tournament.id),
+        tournament_path(@tournament.id),
         notice: 'Player was successfully created.'
       )
     else
